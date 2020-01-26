@@ -1,0 +1,22 @@
+extends ../../../node_modules/@scsa/styling/src/server/views/main.pug
+
+mixin subsystem(application, appendSrc)
+    div(
+        src=application.options.url + "api/fragments"
+        title=application.options.text
+        data-endpoint=application.options.text
+        class="Socket Socket--fullBleed"
+    )
+        esi:include(src=application.options.url + "api/fragments/nodesi" + appendSrc)
+
+block top
+    +subsystem(APPLICATIONS.Sales, "/entry")
+
+block left
+    - const slotA = "/entry?inc=" + encodeURIComponent(APPLICATIONS.Checkout.options.url + "api/fragments/nodesi/controls");
+    +subsystem(APPLICATIONS.Catalogue, slotA)
+
+block right
+    - const innerSlotB = encodeURIComponent("?inc=" + APPLICATIONS.Checkout.options.url + "api/fragments/nodesi/controls");
+    - const slotB = "?inc=" + encodeURIComponent(APPLICATIONS.Catalogue.options.url + "api/fragments/nodesi/thin" + innerSlotB);
+    +subsystem(APPLICATIONS.Checkout, slotB)

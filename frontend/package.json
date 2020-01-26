@@ -1,0 +1,69 @@
+{
+  "private": true,
+  "name": "@scsa/nodesi-orc",
+  "description": "Application Orchestration via nodesi",
+  "license": "MIT",
+  "author": "Florian Gudat <florian.gudat@guices.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guddii/scsa-orc-nodesi"
+  },
+  "version": "1.0.0",
+  "scripts": {
+    "build": "run-s clean build:prod",
+    "build:dev": "run-p \"build:dev:* -- {@}\" -- ",
+    "build:dev:client": "webpack --config ./node_modules/@scsa/build/src/webpack/client/dev.js",
+    "build:dev:server": "webpack --config ./node_modules/@scsa/build/src/webpack/server/dev.js",
+    "build:prod": "run-p \"build:prod:* -- {@}\" -- ",
+    "build:prod:client": "webpack --config ./node_modules/@scsa/build/src/webpack/client/prod.js",
+    "build:prod:server": "webpack --config ./node_modules/@scsa/build/src/webpack/server/prod.js",
+    "clean": "rm -rf ./dist",
+    "start": "node ./dist/server/*.js",
+    "start:watch": "node ./dist/server/*.js",
+    "watch": "run-s clean build:dev start:watch"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "@scsa/build": "https://github.com:guddii/scsa-cfg-build.git",
+    "@scsa/global": "https://github.com:guddii/scsa-cfg-global.git",
+    "@scsa/messaging": "https://github.com:guddii/scsa-lib-messaging.git",
+    "@scsa/styling": "https://github.com:guddii/scsa-lib-styling.git",
+    "cors": "^2.8.5",
+    "css-loader": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "file-loader": "^5.0.2",
+    "mini-css-extract-plugin": "^0.8.0",
+    "nodesi": "^1.12.1",
+    "npm-run-all": "^4.1.5",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
+    "style-loader": "^1.0.1",
+    "terser-webpack-plugin": "^2.2.2",
+    "ts-loader": "^6.2.1",
+    "typeface-permanent-marker": "0.0.72",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.11",
+    "@types/webpack": "^4.41.0",
+    "@types/webpack-dev-middleware": "^2.0.3",
+    "@types/webpack-env": "^1.14.1",
+    "@types/webpack-hot-middleware": "^2.16.5"
+  },
+  "keywords": [
+    "Self-containd System"
+  ],
+  "engines": {
+    "node": ">=12.13.1",
+    "npm": ">=6.13.1"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ]
+}
